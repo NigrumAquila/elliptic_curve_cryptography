@@ -1,0 +1,47 @@
+tests:
+    auto generator = ec.getGenerator();
+
+    auto params = ec.getParams();
+    cout << "params: a = " << params->find('a')->second << " b = " << params->find('b')->second << " q = " << params->find('p')->second << ';' << endl;
+
+    auto reflected_point = ec.reflect(generator);
+
+    cout << "generator point: x = " << generator.m_x << " y = " << generator.m_y << ';' << endl;
+    cout << "reflected point: x = " << reflected_point.m_x << " y = " << reflected_point.m_y << ';' << endl;
+
+
+    __int64 coordX = 16;
+    auto points = ec.findPointsOnX(coordX);
+    cout << "points on x = " << coordX << ": ";
+    cout << "bottom point x = " << points[0].m_x << " y = " << points[0].m_y << "; ";
+    cout << "top point x = " << points[1].m_x << " y = " << points[1].m_y << ';' << endl;
+
+
+    auto& point = generator;
+    auto validation = ec.validatePoint(point);
+    auto belongs = (validation) ? "belongs" : "not belongs";
+    cout << "validation: point x = " << point.m_x << " y = " << point.m_y << " " << belongs << " to graph;" << endl;
+
+
+    auto n = 16;
+    auto inverse = ec.modInverse(n);
+    cout << "multiplicative inverse: " << n << " mod " << ec.getParams()->find('p')->second << " = " << inverse << ';' << endl;
+
+
+    auto& lhs = EllipticCurve::zero; auto& rhs = generator;
+    /*auto& lhs = generator; auto& rhs = EllipticCurve::zero;
+    auto& lhs = generator; auto& rhs = EllipticCurve::Point{ generator.m_x, generator.m_y - 2 };
+    auto& lhs = generator; auto& rhs = EllipticCurve::Point{ generator.m_x, ec.reflect(generator).m_y };
+    auto& lhs = generator; auto& rhs = generator;
+    auto& lhs = generator; auto& rhs = EllipticCurve::Point{ 18, 4 };*/
+    auto R = ec.addiction(lhs, rhs);
+    cout << "addiction: point x = " << lhs.m_x << " y = " << lhs.m_y << " + ";
+    cout << "point x = " << rhs.m_x << " y = " << rhs.m_y << " = ";
+    cout << "R: x = " << R.m_x << " y = " << R.m_y << ';' << endl;
+
+    auto factor = 23;
+    auto Q = ec.multiply(generator, factor);
+    cout << "multiplication: generator x = " << generator.m_x << " y = " << generator.m_y << " * " << factor << " = ";
+    cout << "Q x = " << Q.m_x << " y = " << Q.m_y << ';' << endl;
+    
+    cout << "Subgroup order of generator point x = " << generator.m_x << " y = " << generator.m_y << ": " << ec.getSubgroupOrder(generator) << ';';

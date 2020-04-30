@@ -1,0 +1,15 @@
+tests:
+    ECDSA ecdsa(ec);
+    auto generator = ecdsa.getGenerator();
+    auto subgroupOrder = ecdsa.getSubgroupOrder();
+    auto privateKey = 2;
+    __int64 hash = 512;
+    auto publicKey = ecdsa.generatePublicKey(privateKey);
+    auto signature = ecdsa.sign(hash, privateKey);
+    auto validation = (ecdsa.validate(hash, signature, publicKey)) ? "valid" : "is invalid";
+
+    cout << "Generator: x = " << generator.m_x << " y = " << generator.m_y << ';' << endl;
+    cout << "Subgroup order: " << subgroupOrder << ';' << endl;
+    cout << "Public key: x = " << publicKey.m_x << " y = " << publicKey.m_y << ';' << endl;
+    cout << "Signature of message hash = " << hash << ": lhs = " << signature.first << " rhs = " << signature.second << ';' << endl;
+    cout << "Validation: hash " << hash << " == " << hash << " signature " << validation << ';' << endl;

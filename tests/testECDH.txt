@@ -1,0 +1,11 @@
+tests:
+    ECDH dh(ec);
+    auto privateKey = 2;
+    auto publicKey = dh.generatePublicKey(privateKey);
+    auto sharedSecret = dh.generateSharedSecret(publicKey, 4);
+    auto generator = dh.getGenerator();
+    auto subgroupOrder = dh.getSubgroupOrder();
+    cout << "Generator: x = " << generator.m_x << " y = " << generator.m_y << ';' << endl;
+    cout << "Subgroup order: " << subgroupOrder << ';' << endl;
+    cout << "Public key: x = " << publicKey.m_x << " y = " << publicKey.m_y << ';' << endl;
+    cout << "Shared secret: x = " << sharedSecret.m_x << " y = " << sharedSecret.m_y << ';' << endl;

@@ -1,8 +1,19 @@
+/.pytest_cache
+/.vs
+/Debug
+/examples
+/info
+/x64
+
+*.vcxproj*
+CppProperties*
+
 # Prerequisites
 *.d
 
 # Compiled Object files
 *.slo
+*.sln
 *.lo
 *.o
 *.obj

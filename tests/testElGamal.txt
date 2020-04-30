@@ -1,0 +1,17 @@
+tests:
+    ElGamal elGamal(ec);
+    auto generator = elGamal.getGenerator();
+    auto subgroupOrder = elGamal.getSubgroupOrder();
+    auto privateKey = 2;
+    auto publicKey = elGamal.generatePublicKey(privateKey);
+    auto message = EllipticCurve::Point{ 15, 11 };
+    auto encryptedMessage = elGamal.encrypt(message, publicKey);
+    auto decryptedMessage = elGamal.decrypt(encryptedMessage, privateKey);
+
+    cout << "Generator: x = " << generator.m_x << " y = " << generator.m_y << ';' << endl;
+    cout << "Subgroup order: " << subgroupOrder << ';' << endl;
+    cout << "Public key: x = " << publicKey.m_x << " y = " << publicKey.m_y << ';' << endl;
+    cout << "Message: x = " << message.m_x << " y = " << message.m_y << ';' << endl;
+    cout << "Encrypted message: lhsX = " << encryptedMessage[0].m_x << " lhsY = " << encryptedMessage[0].m_y << ' ';
+    cout << "rhsX = " << encryptedMessage[1].m_x << " rhsY = " << encryptedMessage[1].m_y << ';' << endl;
+    cout << "Decrypted message: x = " << decryptedMessage.m_x << " y = " << decryptedMessage.m_y << ';' << endl;
