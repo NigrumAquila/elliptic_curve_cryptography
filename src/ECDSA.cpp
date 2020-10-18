@@ -26,7 +26,7 @@ bool ECDSA::validate(__int64& hash, std::pair<__int64, __int64>& signature, Elli
 {
 	__int64 u1 = this->ec.modInverse(signature.second) * hash % this->p;
 	__int64 u2 = this->ec.modInverse(signature.second) * signature.first % this->p;
-	__int64 coordX = this->ec.addiction(this->ec.multiply(this->generator, u1), this->ec.multiply(publicKey, u2)).m_x;
+	__int64 coordX = this->ec.addition(this->ec.multiply(this->generator, u1), this->ec.multiply(publicKey, u2)).m_x;
 	return coordX % this->p == signature.first;
 }
 

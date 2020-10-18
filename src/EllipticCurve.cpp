@@ -93,15 +93,15 @@ EllipticCurve::Point EllipticCurve::multiply(const EllipticCurve::Point& point, 
 	EllipticCurve::Point m2 = point;
 	while(0 < n) {
 		if ((n & 1) == 1)
-			r = this->addiction(r, m2);
+			r = this->addition(r, m2);
 
 		n = n >> 1;
-		m2 = this->addiction(m2, m2);
+		m2 = this->addition(m2, m2);
 	}
 	return r;
 }
 
-EllipticCurve::Point EllipticCurve::addiction(const EllipticCurve::Point& lhs, const EllipticCurve::Point& rhs)
+EllipticCurve::Point EllipticCurve::addition(const EllipticCurve::Point& lhs, const EllipticCurve::Point& rhs)
 {
 	if (lhs == EllipticCurve::zero) { return rhs; }
 	if (rhs == EllipticCurve::zero) { return lhs; }

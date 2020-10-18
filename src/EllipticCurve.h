@@ -29,7 +29,7 @@ public:
 	__int64 sqrtModP(__int64 &x);
 	__int64 modInverse(__int64 n);
 
-	Point addiction(const Point& lhs, const Point& rhs);
+	Point addition(const Point& lhs, const Point& rhs);
 	Point multiply(const Point& point, __int64 n);
 	friend bool operator==(const Point& lhs, const Point& rhs);
 
